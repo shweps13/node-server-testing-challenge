@@ -37,12 +37,19 @@ describe('GET /api/resources', () => {
         expect(response.type).toMatch(/json/i);
     });
 
-    // should return an object with an up api property with the value 'up'
+    // should return an object with an resource
 
     it('should return array ', async () => {    
         const response = await request(server).get('/api/resources');
     
-        expect(response.body[1]).toEqual({"id": 2, "note": null, "resName": "sunlight", "resType": "Biological"});
+        expect(response.body[0]).toEqual(
+            {
+                "id": 1,
+                "resName": "machinery",
+                "resType": "Economic",
+                "note": "In economics a resource is defined as a service or other asset used to produce goods"
+            }
+        );
         });
 
     })
