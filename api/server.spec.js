@@ -45,9 +45,9 @@ describe('GET /api/resources', () => {
         expect(response.body[0]).toEqual(
             {
                 "id": 1,
-                "resName": "machinery",
-                "resType": "Economic",
-                "note": "In economics a resource is defined as a service or other asset used to produce goods"
+                "resName": "Sun",
+                "resType": "Biological",
+                "note": null
             }
         );
         });
