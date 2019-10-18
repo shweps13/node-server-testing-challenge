@@ -12,10 +12,8 @@ describe('resources model', () => {
         await db('resources').truncate();  
     })
 
-
   describe('add()', () => {
     it('should add resource to database', async () => {
-
       // check that we add new record
       let resource = await Resources.add({resName: "machinery", resType: "Economic", note: "In economics a resource is defined as a service or other asset used to produce goods"});
 
@@ -31,7 +29,6 @@ describe('resources model', () => {
       expect(resources).toHaveLength(1);
     });
   });
-
 });
 
 describe('put()', () => {
@@ -52,7 +49,32 @@ describe('put()', () => {
         const resources = await db('resources');
         expect(resources).toHaveLength(1);
     });
+});
 
+describe('delete()', () => {
+    
+    it('should add resource to database', async () => {
+        let postNewData = {resName: "Wind", resType: "Biological", note: null};
 
-  
+        // check that we add the record
+        let resource2 = await Resources.add(postNewData);
+
+        let foundRes = await Resources.findById(resource2[0]);
+        console.log(foundRes);
+        expect(foundRes.resName).toBe("Wind");
+        expect(foundRes.resType).toBe("Biological");
+        expect(foundRes.note).toBe(null);
+
+        // check that we have 2 records now
+        const resources = await db('resources');
+        expect(resources).toHaveLength(2);
+
+        // removing second record
+        let DelRes = await Resources.remove(resource2[0]);
+
+        // check that we have one element
+        const resourcesAfter = await db('resources');
+        expect(resourcesAfter).toHaveLength(1);
+
+    });
 });
